@@ -5,7 +5,7 @@ services:
     image: openjdk:18
     container_name: 'main-app-spring'
     ports:
-      - 8182:8080
+      - 8182:8080 # Inner/External
     environment:
       RABBIT_HOST: queue
     links:
@@ -26,10 +26,10 @@ services:
   processor:
     container_name: 'processor-golang'
     build:
-      dockerfile: ../processor/Dockerfile
       context: .
+      dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - "8000:8000"
     environment:
       AMQP_SERVER_URL: amqp://guest:guest@message-broker:5672/
     restart: always

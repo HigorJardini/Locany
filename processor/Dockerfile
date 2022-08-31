@@ -1,27 +1,30 @@
-# ./Dockerfile-sender
+# Start from golang:1.19-alpine base image
+FROM golang:1.19-alpine
 
-FROM golang:1.19 AS builder
+# The latest alpine images don't have some tools like (`git` and `bash`).
+# Adding git, bash and openssh to the image
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
 
-# Move to working directory (/build).
-WORKDIR /build
+# Add Maintainer Info
+#LABEL maintainer="Rajeev Singh <rajeevhub@gmail.com>"
 
-# Copy and download dependency using go mod.
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+# Copy go mod and sum files
 COPY go.mod go.sum ./
+
+# Download all dependancies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-# Copy the code into the container.
-COPY ./main.go .
+# Copy the source from the current directory to the Working Directory inside the container
+COPY . .
 
-# Set necessary environment variables needed 
-# for our image and build the sender.
-ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
-RUN go build -ldflags="-s -w" -o processor .
+# Build the Go app
+RUN go build -o main .
 
-FROM scratch
+EXPOSE 8000
 
-# Copy binary and config files from /build 
-# to root folder of scratch container.
-COPY --from=builder ["/build/processor", "/"]
-
-# Command to run when starting the container.
-ENTRYPOINT ["/processor"]
+# Run the executable
+CMD ["./main"]
