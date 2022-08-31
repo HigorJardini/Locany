@@ -1,20 +1,20 @@
 version: "3.2"
 
 services:
-  springboot:
+  main:
     image: openjdk:18
-    container_name: 'springboot'
+    container_name: 'main-app-spring'
     ports:
       - 8182:8080
     environment:
-      RABBIT_HOST: rabbitmq
+      RABBIT_HOST: queue
     links:
-      - rabbitmq
+      - queue
     networks:
       - app
-  rabbitmq:
+  queue:
     image: rabbitmq:3.8-management
-    container_name: 'rabbitmq'
+    container_name: 'queue-rabbitmq'
     ports:
         - 5672:5672 #JMS Port
         - 15672:15672 #Management Port - default user:pass = guest:guest
@@ -23,6 +23,20 @@ services:
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
         - app
+  processor:
+    container_name: 'processor-golang'
+    build:
+      dockerfile: ../processor/Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      AMQP_SERVER_URL: amqp://guest:guest@message-broker:5672/
+    restart: always
+    depends_on:
+      - queue
+    networks:
+      - app
 
 networks:
   app:
