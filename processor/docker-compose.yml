@@ -1,17 +1,17 @@
 version: "3.2"
 
 services:
-  main:
-    image: openjdk:18
-    container_name: 'main-app-spring'
-    ports:
-      - 8182:8080 # Inner/External
-    environment:
-      RABBIT_HOST: queue
-    links:
-      - queue
-    networks:
-      - app
+  # main:
+  #   image: openjdk:18
+  #   container_name: 'main-app-spring'
+  #   ports:
+  #     - 8182:8080 # Inner/External
+  #   environment:
+  #     RABBIT_HOST: queue
+  #   links:
+  #     - queue
+  #   networks:
+  #     - app
   queue:
     image: rabbitmq:3.8-management
     container_name: 'queue-rabbitmq'
@@ -29,12 +29,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "3000:3000"
     environment:
-      AMQP_SERVER_URL: amqp://guest:guest@message-broker:5672/
-    restart: always
+      AMQP_SERVER_URL: amqp://guest:guest@queue
+    links:
+      - queue
     depends_on:
       - queue
+    restart: on-failure
     networks:
       - app
 

@@ -34,7 +34,7 @@ func main() {
     // With the instance and declare Queues that we can
     // publish and subscribe to.
     _, err = channelRabbitMQ.QueueDeclare(
-        "QueueService1", // queue name
+        "teste", // queue name
         true,            // durable
         false,           // auto delete
         false,           // exclusive
@@ -64,7 +64,7 @@ func main() {
         // Attempt to publish a message to the queue.
         if err := channelRabbitMQ.Publish(
             "",              // exchange
-            "QueueService1", // queue name
+            "teste", // queue name
             false,           // mandatory
             false,           // immediate
             message,         // message to publish

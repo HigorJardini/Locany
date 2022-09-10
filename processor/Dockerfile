@@ -24,7 +24,7 @@ COPY . .
 # Build the Go app
 RUN go build -o main .
 
-EXPOSE 8000
+EXPOSE 3000
 
 # Run the executable
 CMD ["./main"]
