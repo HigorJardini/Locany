@@ -1,0 +1,32 @@
+{
+  "token_id": "bad18eba1ff45jk7858b8ae88a77fa30",
+  "process_sync": false,
+  "simple_return": false,
+  "address": [
+    {
+      "zipcode": "14401426",
+      "street": "Av. Alonso Y Alonso",
+      "neighborhood": "São José",
+      "number": "2400",
+      "geographiccoordinates": {
+        "longitude": "-20.53771283687179",
+        "latitude": "-47.38949152944766"
+      },
+      "city": {
+        "city_name": "Franca",
+        "city_code": 8713
+      },
+      "state": {
+        "state_name": "São Paulo",
+        "state_acronyms": "SP"
+      },
+      "country": {
+        "country_name": "Brasil",
+        "country_code": 55
+      },
+      "phone_information": {
+        "phone_code": 16
+      }
+    }
+  ]
+}

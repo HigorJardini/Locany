@@ -1,0 +1,51 @@
+{
+    "req_token": "g5ghn533F4#@gth4wgfh55#%g",
+    "response_address": [
+        {
+            "found": true,
+            "id": 1,
+            "address": {
+                "informations": {
+                    "zipcode": "14401426",
+                    "street": {
+                        "name": "Av. Alonso Y Alonso",
+                        "references": [
+                            "Ao lado do MCDonalts",
+                            "Em frente ao teatro municipal"
+                        ]
+                    },
+                    "neighborhood": {
+                        "name": "São José",
+                        "category": {
+                            "name": "college",
+                            "description": ""
+                        },
+                        "references": [
+                            "Próximo a avenida"
+                        ]
+                    },
+                    "number": "2400"
+                },
+                "geographiccoordinates": {
+                    "longitude": "-20.53771283687179",
+                    "latitude": "-47.38949152944766"
+                },
+                "city": {
+                    "city_name": "Franca",
+                    "city_code": 8713
+                },
+                "state": {
+                    "state_name": "São Paulo",
+                    "state_acronyms": "SP"
+                },
+                "country": {
+                    "country_name": "Brasil",
+                    "country_code": 55
+                },
+                "phone_information": {
+                    "phone_code": 16
+                }
+            }
+        }
+    ]
+}

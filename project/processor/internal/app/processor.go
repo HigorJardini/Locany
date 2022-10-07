@@ -1,6 +1,4 @@
-// ./sender/main.go
-
-package main
+package app
 
 import (
     "log"
@@ -11,8 +9,8 @@ import (
     "github.com/streadway/amqp"
 )
 
-func main() {
-    // Define RabbitMQ server URL.
+func sender() {
+	// Define RabbitMQ server URL.
     amqpServerURL := os.Getenv("AMQP_SERVER_URL")
 
     // Create a new RabbitMQ connection.
@@ -74,7 +72,4 @@ func main() {
 
         return nil
     })
-
-    // Start Fiber API server.
-    log.Fatal(app.Listen(":3000"))
 }
